@@ -1,0 +1,189 @@
+/* Общие стили */
+body {
+    font-family: sans-serif;
+    background-color: black;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    color: rgb(255, 1, 1);
+    position: relative;
+}
+
+/* Стили для куба */
+.cube-container {
+    width: 200px;
+    height: 200px;
+    perspective: 800px;
+    margin-bottom: 20px;
+    z-index: 1;
+}
+
+.cube {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: rotateCube 20s infinite linear;
+}
+
+@keyframes rotateCube {
+    0% { transform: rotateX(0deg) rotateY(0deg); }
+    100% { transform: rotateX(360deg) rotateY(360deg); }
+}
+
+.cube-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.382);
+    border: 1px solid rgba(255, 255, 255, 0.358);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 2px;
+    box-sizing: border-box;
+}
+
+/* Размещение граней куба */
+#face1 { transform: translateZ(100px); }
+#face2 { transform: rotateY(90deg) translateZ(100px); }
+#face3 { transform: rotateY(180deg) translateZ(100px); }
+#face4 { transform: rotateY(270deg) translateZ(100px); }
+#face5 { transform: rotateX(90deg) translateZ(100px); }
+#face6 { transform: rotateX(-90deg) translateZ(100px); }
+
+.square {
+    background-color: #ff0404b1;
+    border: 1px solid #f50901;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+}
+
+.square:hover {
+    background-color: #ff0000;
+}
+
+/* Стили для падающих символов */
+.character {
+    position: absolute;
+    color: rgb(255, 0, 0);
+    font-size: 2em;
+    white-space: nowrap;
+    animation: falling 5s linear infinite;
+    top: -30px;
+    z-index: 0;
+}
+
+@keyframes falling {
+    0% {
+        transform: translateY(0vh);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(110vh);
+        opacity: 1;
+    }
+}
+
+/* Стили для кнопки "Начать сначала" */
+#restartButton {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    background-color:rgb(255, 0, 0);
+    font-size: 1.5em;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 5px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1;
+}
+
+/* Кнопка "Выход" (только CSS) */
+#exitButton {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    display: block;
+    width: 40px; /* Квадратная кнопка */
+    height: 40px;
+    background-color: rgba(255, 0, 0, 0.8); /* Красный фон с прозрачностью */
+    border-radius: 5px; /* Скругленные углы */
+    z-index: 2; /*  над остальными элементами */
+    text-decoration: none; /* Убрать подчеркивание ссылки */
+    /* Стрелка */
+    /* Сделаем стрелку с помощью псевдоэлемента ::before */
+    transition: background-color 0.3s ease; /* Плавный переход цвета при наведении */
+
+}
+
+#exitButton::before {
+    content: ''; /* Обязательно для псевдоэлемента */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(135deg); /* Центрирование и поворот */
+    border: solid black; /* Цвет стрелки */
+    border-width: 0 3px 3px 0; /* Создание стрелки */
+    display: inline-block;
+    padding: 3px; /* Размер стрелки */
+
+}
+
+/* Эффект при наведении */
+#exitButton:hover {
+    background-color: rgba(255, 0, 0, 1); /* Более насыщенный красный при наведении */
+}
+
+.square-button {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-color: #ff0000;
+    color: white;
+    text-decoration: none;
+    font-size: 2em;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 0px;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
+
+    position: fixed; /* Изменил на fixed для прилипания к углу */
+    top: 20px;
+    left: 20px;
+    z-index: 2;
+}
+
+.square-button:hover {
+    background-color: #b30000d0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.square-button:active {
+    background-color: #850000b0;
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Media query для маленьких экранов (например, мобильных) */
+@media (max-width: 768px) {
+    body {
+        transform-origin: top left;
+        transform: scale(0.5);
+        width: 200%;
+        height: 200%;
+    }
+}

@@ -1,0 +1,129 @@
+/* Общие стили */
+body {
+    font-family: sans-serif;
+    background-color: rgb(251, 248, 214);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    color: rgb(255, 1, 1);
+    position: relative;
+}
+
+/* Стили для куба */
+.cube-container {
+    width: 200px; /* Фиксированная ширина для ПК */
+    height: 200px; /* Фиксированная высота для ПК */
+    perspective: 800px;
+    margin-bottom: 40px;
+    z-index: 1;
+}
+
+.cube {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: rotateCube 20s infinite linear;
+}
+
+@keyframes rotateCube {
+    0% { transform: rotateX(0deg) rotateY(0deg); }
+    100% { transform: rotateX(360deg) rotateY(360deg); }
+}
+
+.cube-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 206, 8, 0.382);
+    border: 1px solid rgba(251, 255, 0, 0.358);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 2px;
+    box-sizing: border-box;
+}
+
+#face1 { transform: translateZ(100px); }
+#face2 { transform: rotateY(90deg) translateZ(100px); }
+#face3 { transform: rotateY(180deg) translateZ(100px); }
+#face4 { transform: rotateY(270deg) translateZ(100px); }
+#face5 { transform: rotateX(90deg) translateZ(100px); }
+#face6 { transform: rotateX(-90deg) translateZ(100px); }
+
+.square {
+    background-color: #ff7904b1;
+    border: 1px solid #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    color: rgb(0, 0, 0);
+}
+
+.character {
+    position: absolute;
+    color: rgb(255, 0, 0);
+    font-size: 2em;
+    white-space: nowrap;
+    animation: falling 5s linear infinite;
+    top: -30px;
+    z-index: 0;
+}
+
+@keyframes falling {
+    0% {
+        transform: translateY(0vh);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(110vh);
+        opacity: 1;
+    }
+}
+
+/* Стили для кнопки */
+.custom-button {
+    padding: 20px 40px;
+    font-size: 2.8em;
+    cursor: pointer;
+    background-color: rgb(255, 119, 0); /* Красный с прозрачностью */
+    color: rgb(255, 255, 255);
+    border: 2px solid rgba(255, 255, 255, 0.3); /* Белая полупрозрачная рамка */
+    border-radius: 55px;
+    z-index: 1;
+    text-decoration: none;
+    margin-top: 100px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.custom-button:hover {
+    background-color: rgba(255, 119, 0, 0.62); /* Немного затемненный красный при наведении */
+    border-color: rgba(255, 255, 255, 0.6); /* Более яркая рамка при наведении */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+.custom-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    background-color: rgba(204, 0, 0, 0.9); /* Еще более темный красный при нажатии */
+}
+
+/* Media query для маленьких экранов (например, мобильных) */
+@media (max-width: 768px) {
+    body {
+        transform-origin: top left;
+        transform: scale(0.5); /* Уменьшаем весь сайт в два раза */
+        width: 200%; /* Важно! Компенсируем уменьшение масштаба по ширине */
+        height: 200%; /* Важно! Компенсируем уменьшение масштаба по высоте */
+    }
+}

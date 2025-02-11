@@ -1,0 +1,119 @@
+body {
+    font-family: sans-serif;
+    background-color: rgb(251, 248, 214);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    text-align: center; /* Центрирование по умолчанию */
+}
+
+/* Контейнер для центрированных кнопок */
+.button-container {
+    display: flex;
+    justify-content: center; /* Центрируем кнопки по горизонтали */
+    align-items: center;
+    flex-wrap: wrap; /* Перенос на новую строку, если не помещаются */
+    gap: 20px; /* Расстояние между кнопками */
+    margin-bottom: 20px;
+    z-index: 1;
+}
+
+/* Общие стили для кнопок */
+.center-button {
+    padding: 15px 30px;
+    font-size: 1.5em;
+    cursor: pointer;
+    background-color: #FFA500; /* Ярко-оранжевый */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    z-index: 1; /* Чтобы кнопки были поверх падающих символов */
+}
+
+.center-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.center-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Кнопка "Назад" */
+.square-button {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-color: #ffa600;
+    color: white;
+    text-decoration: none;
+    font-size: 2em;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 0px;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
+
+    position: fixed; /* Изменил на fixed для прилипания к углу */
+    top: 20px;
+    left: 20px;
+    z-index: 2;
+}
+
+.square-button:hover {
+    background-color: #ffa600cc;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.square-button:active {
+    background-color: #a76502;
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Адаптивные стили для падающих цифр */
+.character {
+    position: absolute;
+    color: rgb(255, 0, 0);
+    font-size: 2em;
+    white-space: nowrap;
+    animation: falling 5s linear infinite;
+    top: -30px;
+    z-index: 0;
+}
+
+@keyframes falling {
+    0% {
+        transform: translateY(0vh);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(110vh);
+        opacity: 1;
+    }
+}
+
+/* Media query для маленьких экранов (например, мобильных) */
+@media (max-width: 768px) {
+    body {
+        transform-origin: top left;
+        transform: scale(0.5);
+        width: 200%;
+        height: 200%;
+    }
+
+    .center-button {
+        font-size: 3em;
+    }
+}

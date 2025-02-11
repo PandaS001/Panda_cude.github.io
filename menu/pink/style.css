@@ -1,0 +1,153 @@
+/* Общие стили */
+body {
+    font-family: sans-serif;
+    background-color: rgba(102, 0, 255, 0.373);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    color: rgb(255, 1, 1);
+    position: relative;
+}
+
+/* Стили для куба */
+.cube-container {
+    width: 200px;
+    height: 200px;
+    perspective: 800px;
+    margin-bottom: 20px;
+    z-index: 1;
+}
+
+.cube {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: rotateCube 20s infinite linear;
+}
+
+@keyframes rotateCube {
+    0% { transform: rotateX(0deg) rotateY(0deg); }
+    100% { transform: rotateX(360deg) rotateY(360deg); }
+}
+
+.cube-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 230, 0, 0);
+    border: 1px solid rgba(255, 242, 0, 0);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 2px;
+    box-sizing: border-box;
+}
+
+/* Размещение граней куба */
+#face1 { transform: translateZ(100px); }
+#face2 { transform: rotateY(90deg) translateZ(100px); }
+#face3 { transform: rotateY(180deg) translateZ(100px); }
+#face4 { transform: rotateY(270deg) translateZ(100px); }
+#face5 { transform: rotateX(90deg) translateZ(100px); }
+#face6 { transform: rotateX(-90deg) translateZ(100px); }
+
+.square {
+    background-color: #e204ff8b;
+    border: 1px solid #8f01f576;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    cursor: pointer;
+    color: black;
+}
+
+.square:hover {
+    background-color: #ff8400;
+}
+
+/* Стили для падающих символов */
+.character {
+    position: absolute;
+    color: rgb(238, 0, 255);
+    font-size: 2em;
+    white-space: nowrap;
+    animation: falling 5s linear infinite;
+    top: -30px;
+    z-index: 0;
+}
+
+@keyframes falling {
+    0% {
+        transform: translateY(0vh);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(110vh);
+        opacity: 1;
+    }
+}
+
+/* Стили для кнопки */
+#restartButton {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    background-color:rgba(255, 0, 247, 0.876);
+    font-size: 1.5em;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 5px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1;
+}
+
+.square-button {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-color: #c300ff;
+    color: white;
+    text-decoration: none;
+    font-size: 2em;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 0px;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
+
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 2;
+}
+
+.square-button:hover {
+    background-color: #9e00b3cb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.square-button:active {
+    background-color: #7600858f;
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Media query для маленьких экранов (например, мобильных) */
+@media (max-width: 768px) {
+    body {
+        transform-origin: top left;
+        transform: scale(0.5);
+        width: 200%;
+        height: 200%;
+    }
+}
